@@ -41,21 +41,5 @@ class Main(commands.Cog):
         embed = discord.Embed(description=":ping_pong: **Pong!**\nPing: {0}ms".format((round(ctx.bot.latency * 1000))), color=0x36393E)
         await ctx.send(embed=embed)
         
-    @commands.command()
-    async def vote(self, ctx):
-        """Vote for us!"""
-        embed = discord.Embed(description="Here is some information, it is optional to vote, and we appreciate it very much as it helps us grow and become featured on some sites! :heart:\n\n[Cloud Bot List](https://www.cloudlist.xyz/bots/554852324376313856)\n\n[Glenn Bot List](https://glennbotlist.xyz/bot/554852324376313856)\n\n[Bots for Discord](https://botsfordiscord.com/bot/554852324376313856)\n\n[Arcane Bot List](https://arcane-botcenter.xyz/bot/554852324376313856)", color=0x36393E)
-        await ctx.send(embed=embed)
-        
-    @commands.command(aliases=['idea'])
-    async def suggest(self, ctx):
-        """Send an idea to my owner"""
-        await ctx.send("What's the idea you're suggesting? (**NOTE: YOU CANNOT CANCEL, ABUSE OF THIS WILL BE A BLACKLIST**)")
-        idea = await self.bot.wait_for('message', check=lambda message: message.author == ctx.author and ctx.channel == message.channel)
-        ideamsg = idea.content
-        await ctx.send("Alright, I've sent the suggestion!")
-        embed = discord.Embed(description="User suggesting: {} (`{}`)\n\nSuggestion: {}".format(ctx.author.mention, ctx.author.id, ideamsg))
-        await self.bot.get_channel(648010374968246277).send(embed=embed)
-        
 def setup(bot):
     bot.add_cog(Main(bot))
