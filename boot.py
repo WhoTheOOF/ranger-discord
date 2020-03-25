@@ -95,7 +95,7 @@ async def r(ctx, cog: str):
         print(f'{traceback.format_exc()}__________________________________________')
         await ctx.send(f'```py\n{e}\n```Full error in console')
 
-with open('token.txt', 'r') as token:
+with open('token.txt', 'r') as tokens: # THE S ON THIS LINE
   bot.tokens = [line.strip() for line in tokens.readlines()]
 
 bot.run(bot.tokens[0])
