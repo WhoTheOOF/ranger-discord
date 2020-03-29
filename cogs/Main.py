@@ -10,10 +10,10 @@ class Main(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         
-    @commands.command(aliases=['mem', 'memory'], hidden=True)
+    @commands.command(aliases=['mem', 'm'], hidden=True)
     @commands.is_owner()
-    async def m(self, ctx):
-        await ctx.send(f'You are currently using **{round(Process(getpid()).memory_info().rss/1024/1024, 2)} MB**')
+    async def memory(self, ctx):
+        await ctx.send(f'Ranger is currently using **{round(Process(getpid()).memory_info().rss/1024/1024, 2)} MB** of memory.')
 
     @commands.command()
     async def avatar(self, ctx, *, user: discord.User):
