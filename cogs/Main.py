@@ -56,7 +56,7 @@ class Main(commands.Cog):
     @commands.command(aliases=['mem', 'm'], hidden=True)
     @commands.is_owner()
     async def memory(self, ctx):
-        await ctx.send(f'Ranger is currently using **{round(Process(getpid()).memory_info().rss/1024/1024, 2)} MB** of memory.')
+        await ctx.send(f'{ctx.bot.user.name} is currently using **{round(Process(getpid()).memory_info().rss/1024/1024, 2)} MB** of memory.')
 
     @commands.command()
     async def avatar(self, ctx, *, user: discord.User):
@@ -68,23 +68,6 @@ class Main(commands.Cog):
         embed.set_image(url=avatar)
         await ctx.send(embed=embed)
 
-    @commands.command()
-    async def testembed(self, ctx):
-        embed = discord.Embed(title="Title", description="Description", colour=discord.Color.blue(), url="https://www.google.com")
-
-        embed.set_author(name=self.bot.user.name, icon_url=self.bot.user.avatar_url)
-        embed.set_footer(text=ctx.author.name, icon_url=ctx.author.avatar_url)
-        embed.set_image(url="https://discordpy.readthedocs.io/en/rewrite/_images/snake.png")
-        embed.set_thumbnail(url="https://www.python.org/static/img/python-logo.png")
-
-        embed.add_field(name="Field 1", value="Value 1")
-        embed.add_field(name="Field 2", value="Value 2")
-    
-        embed.add_field(name="Field 3", value="Value 3", inline=False)
-        embed.add_field(name="Field 4", value="Value 4")
-
-        await ctx.send(embed=embed)
-        
     @commands.command()
     async def ping(self, ctx):
         """Get the bot's ping"""
