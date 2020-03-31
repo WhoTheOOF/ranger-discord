@@ -12,8 +12,8 @@ class Main(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         
-    @commands.command(aliases=['getcode', 'gcode', 'getc', 'sourcecode', 'scode', 'sourcec'])
-    async def code(self, ctx, *, command: str = None):
+    @commands.command(name='source', aliases=['getcode', 'gcode', 'getc', 'sourcecode', 'scode', 'sourcec'])
+    async def _source(self, ctx, *, command: str = None):
         """Displays my full source code or for a specific command."""
         source_url = "https://github.com/WhoTheOOF/ranger-discord"
         branch = "master"
