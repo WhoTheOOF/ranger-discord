@@ -22,7 +22,7 @@ class Main(commands.Cog):
         output = end - 0.3
         if round(output) > 100:
             output = 100
-        await ctx.send(f'{user.name} is {output}% gay!')
+        await ctx.send(f'**{user.name}** is **{output}%** gay!')
         
     @commands.command(name='source', aliases=['getcode', 'gcode', 'getc', 'sourcecode', 'scode', 'sourcec'])
     async def _source(self, ctx, *, command: str = None):
