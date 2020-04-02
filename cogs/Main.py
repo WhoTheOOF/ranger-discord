@@ -12,6 +12,18 @@ class Main(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         
+    @commands.command()
+    async def gay(self, ctx, user: discord.User = None):
+        """tell how game someone is, k boomer"""
+        user = user if user is not None else ctx.author
+        input = len(user.name)
+        middle = input / 5
+        end = (middle * 60) / 3
+        output = end - 0.3
+        if round(output) > 100:
+            output = 100
+        await ctx.send(f'{user.name} is {output}% gay!')
+        
     @commands.command(name='source', aliases=['getcode', 'gcode', 'getc', 'sourcecode', 'scode', 'sourcec'])
     async def _source(self, ctx, *, command: str = None):
         """Displays my full source code or for a specific command."""
