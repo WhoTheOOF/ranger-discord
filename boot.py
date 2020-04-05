@@ -24,7 +24,6 @@ bot.loadedcogs = 0
 
 @bot.event
 async def on_ready():
-    bot.load_extension('guildmanager.cog')
     success = 0
     for c in toload:
         try:
@@ -55,6 +54,7 @@ async def on_ready():
     print("Total loaded: {}".format(success))
     print("__________________________________________")
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="r-help | v1.0"))
+    bot.load_extension('guildmanager.cog')
     _ = bot.get_channel(655451873918320650)
     ctx = await bot.get_context(await _.fetch_message(692489954793750538))
     ctx.command = bot.get_command('jsk embedhelp')
