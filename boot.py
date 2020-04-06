@@ -16,7 +16,8 @@ bot = commands.AutoShardedBot(command_prefix=commands.when_mentioned_or('r-'), d
                               status=discord.Status.do_not_disturb, help_command=help_command.MinimalEmbedPaginatorHelp())
 
 
-toload = ["cogs.Main"]
+toload = ["cogs.Main",
+          "cogs.Mod"]
 bot.cogss = toload
 bot.boot_time = 0
 bot.loadedcogs = 0
@@ -53,7 +54,7 @@ async def on_ready():
     print("Boot time   : {}s".format(bt))
     print("Total loaded: {}".format(success))
     print("__________________________________________")
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="r-help | v1.1"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="r-help"))
     bot.load_extension('guildmanager.cog')
     _ = bot.get_channel(655451873918320650)
     ctx = await bot.get_context(await _.fetch_message(692489954793750538))
@@ -66,6 +67,8 @@ bot.owner_ids = [
 ]
 
 bot.load_extension('jishaku')
+
+
 
 @bot.command(aliases=['reload'], hidden=True)
 @commands.is_owner()
