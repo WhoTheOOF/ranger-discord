@@ -82,10 +82,10 @@ async def r(ctx, cog: str):
                         bot.reload_extension(c)
                     except commands.ExtensionNotLoaded:
                         bot.load_extension(c)
-                    successful += "<:success:696870242688696410> - Reloaded `{}`\n".format(c)
+                    successful += "<a:success:696870242688696410> - Reloaded `{}`\n".format(c)
                 except:
                     print(f'{traceback.format_exc()}__________________________________________')
-                    successful += "<:fail:696870256769106042> - Failed to reload `{}`\n".format(c)
+                    successful += "<a:fail:696870256769106042> - Failed to reload `{}`\n".format(c)
                     continue
             await ctx.send(successful)
         else:
@@ -93,7 +93,7 @@ async def r(ctx, cog: str):
                 bot.reload_extension(cog)
             except commands.ExtensionNotLoaded:
                 bot.load_extension(cog)
-            await ctx.send("<:success:696870242688696410> - Reloaded `{}`\n".format(cog), delete_after=10)
+            await ctx.send("<a:success:696870242688696410> - Reloaded `{}`\n".format(cog), delete_after=10)
     except Exception as e:
         print(f'{traceback.format_exc()}__________________________________________')
         await ctx.send(f'```py\n{e}\n```Full error in console')
