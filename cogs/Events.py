@@ -14,7 +14,7 @@ class Events(commands.Cog):
 
     if guild.id == 647996543999148067:
 
-      await channel.send(f"<:join:696870271096979478> {member.mention} ({member}) has joined the server!")
+      await channel.send(f"<a:join:696870271096979478> {member.mention} ({member}) has joined the server!")
 
   @commands.Cog.listener()
   async def on_member_remove(self, member):
@@ -24,16 +24,16 @@ class Events(commands.Cog):
 
     if guild.id == 647996543999148067:
 
-      await channel.send(f"<:bye:696870284392792255> {member.mention} ({member}) has left the server.")
+      await channel.send(f"<a:bye:696870284392792255> {member.mention} ({member}) has left the server.")
       
   @commands.Cog.listener()
   async def on_guild_join(self, guild):
-    embed = discord.Embed(description="<:join:696870271096979478> **Joined a server**\n\n**Name:** {}\n\n**ID:** {}\n\n**Owner:** {} (`{}`)".format(guild.name, guild.id, guild.owner.mention, guild.owner.id))
+    embed = discord.Embed(description="<a:join:696870271096979478> **Joined a server**\n\n**Name:** {}\n\n**ID:** {}\n\n**Owner:** {} (`{}`)".format(guild.name, guild.id, guild.owner.mention, guild.owner.id))
     await self.bot.get_channel(648010351186673664).send(embed=embed)
     
   @commands.Cog.listener()
   async def on_guild_remove(self, guild):
-    embed = discord.Embed(description="<:bye:696870284392792255> **Left a server**\n\n**Name:** {}\n\n**ID:** {}\n\n**Owner:** {} (`{}`)".format(guild.name, guild.id, guild.owner.mention, guild.owner.id))
+    embed = discord.Embed(description="<a:bye:696870284392792255> **Left a server**\n\n**Name:** {}\n\n**ID:** {}\n\n**Owner:** {} (`{}`)".format(guild.name, guild.id, guild.owner.mention, guild.owner.id))
     await self.bot.get_channel(648010351186673664).send(embed=embed)
       
 def setup(bot):
