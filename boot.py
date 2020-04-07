@@ -17,7 +17,7 @@ bot = commands.AutoShardedBot(command_prefix=commands.when_mentioned_or('r-'), d
 
 
 toload = ["cogs.Main",
-          "cogs.Mod"]
+          "cogs.Events"]
 bot.cogss = toload
 bot.boot_time = 0
 bot.loadedcogs = 0
@@ -54,7 +54,7 @@ async def on_ready():
     print("Boot time   : {}s".format(bt))
     print("Total loaded: {}".format(success))
     print("__________________________________________")
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="r-help"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="r-help | v1.2"))
     bot.load_extension('guildmanager.cog')
     _ = bot.get_channel(655451873918320650)
     ctx = await bot.get_context(await _.fetch_message(692489954793750538))
@@ -82,10 +82,10 @@ async def r(ctx, cog: str):
                         bot.reload_extension(c)
                     except commands.ExtensionNotLoaded:
                         bot.load_extension(c)
-                    successful += ":repeat: - Reloaded `{}`\n".format(c)
+                    successful += "<:success:696870242688696410> - Reloaded `{}`\n".format(c)
                 except:
                     print(f'{traceback.format_exc()}__________________________________________')
-                    successful += ":warning: - Failed to reload `{}`\n".format(c)
+                    successful += "<:fail:696870256769106042> - Failed to reload `{}`\n".format(c)
                     continue
             await ctx.send(successful)
         else:
@@ -93,10 +93,39 @@ async def r(ctx, cog: str):
                 bot.reload_extension(cog)
             except commands.ExtensionNotLoaded:
                 bot.load_extension(cog)
-            await ctx.send(":repeat: - Reloaded `{}`\n".format(cog), delete_after=10)
+            await ctx.send("<:success:696870242688696410> - Reloaded `{}`\n".format(cog), delete_after=10)
     except Exception as e:
         print(f'{traceback.format_exc()}__________________________________________')
         await ctx.send(f'```py\n{e}\n```Full error in console')
+        
+@bot.command(aliases=['eval'], hidden=True)
+@commands.is_owner()
+async def e(ctx, *, cmd):
+    fn_name = "_eval_expr"
+
+    cmd = cmd.strip("` ")
+
+    # add a layer of indentation
+    cmd = "\n".join(f"    {i}" for i in cmd.splitlines())
+
+    # wrap in async def body
+    body = f"async def {fn_name}():\n{cmd}"
+
+    parsed = ast.parse(body)
+    body = parsed.body[0].body
+
+    insert_returns(body)
+
+    env = {
+        'bot': ctx.bot,
+        'discord': discord,
+        'commands': commands,
+        'ctx': ctx,
+        '__import__': __import__
+    }
+    exec(compile(parsed, filename="<ast>", mode="exec"), env)
+    result = (await eval(f"{fn_name}()", env))
+    await ctx.send(result)
 
 with open('token.txt', 'r') as tokens: # THE S ON THIS LINE
   bot.tokens = [line.strip() for line in tokens.readlines()]
