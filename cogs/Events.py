@@ -1,5 +1,5 @@
 import discord
-import utils
+from discord.ext import utils
 from discord.ext import commands
 from utils import objects
 
