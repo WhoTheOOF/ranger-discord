@@ -14,7 +14,7 @@ class Main(commands.Cog):
         
     @commands.command()
     async def gay(self, ctx, user: discord.User = None):
-        """tell how game someone is, k boomer"""
+        """tell how gay someone is, k boomer"""
         user = user if user is not None else ctx.author
         input = len(user.name)
         middle = input / 5
