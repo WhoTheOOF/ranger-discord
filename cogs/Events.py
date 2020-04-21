@@ -22,16 +22,6 @@ class Events(commands.Cog):
         emb.timestamp = datetime.datetime.utcnow()
         return emb
 
-    def get_state(self, guild)->objects.LoggingFlags:
-        if guild.id not in self.states:
-            return None
-
-
-        if self.states[guild.id] is not None and not self.states[guild.id].channel:
-            return None
-
-        return self.states[guild.id]
-
     async def send_to_channel(self, state, content=None, embed=None):
         channel = self.bot.get_channel(state.channel)
         if channel is None:
