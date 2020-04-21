@@ -114,7 +114,7 @@ class Main(commands.Cog):
         embed.set_thumbnail(
             url="https://cdn.discordapp.com/avatars/692487204441817200/05d82251bc246225507ce639d4e79d1d.png?size=1024")
 
-        embed.add_field(name="**Owner**", value="<@533520461653606410>", inline=True)
+        embed.add_field(name="**Owner**", value="<@699751199850758267>", inline=True)
         embed.add_field(name="**Library**", value="discord.py", inline=True)
         embed.add_field(name="**Server Count**", value=len(self.bot.guilds), inline=True)
         embed.add_field(name="**Bot Users**", value=len(self.bot.users), inline=True)
