@@ -1,7 +1,5 @@
 import discord
-from discord import utils
 from discord.ext import commands
-from utils import objects
 
 class Events(commands.Cog):
 
