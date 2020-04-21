@@ -11,14 +11,14 @@ class Events(commands.Cog):
   async def on_member_ban(self, member):
     embed = discord.Embed(title="Ranger Logging - User Banned", description="**User: {} (`{}`)\n**Mod:** {} (`{}`)\n**Reason:** {}".format(
                                    member.mention, str(member), ctx.message.author.mention, str(ctx.author), reason))
-    channel = discord.utils.get(ctx.message.guild.text_channels, name='mod-logs')
+    channel = discord.utils.get(ctx.guild.text_channels, name='mod-logs')
     await channel.send(embed=embed)
 
   @commands.Cog.listener()
   async def on_member_unban(self, member):
     embed = discord.Embed(title="Ranger Logging - User Unbanned", description="**User: {} (`{}`)\n**Mod:** {} (`{}`)\n**Reason:** {}".format(
                                    member.mention, str(member), ctx.message.author.mention, str(ctx.author), reason))
-    channel = discord.utils.get(ctx.message.guild.text_channels, name='mod-logs')
+    channel = discord.utils.get(ctx.guild.text_channels, name='mod-logs')
     await channel.send(embed=embed)
   
   @commands.Cog.listener()
