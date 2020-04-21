@@ -12,18 +12,6 @@ class Main(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         
-    @commands.command()
-    async def gay(self, ctx, user: discord.User = None):
-        """tell how game someone is, k boomer"""
-        user = user if user is not None else ctx.author
-        input = len(user.name)
-        middle = input / 5
-        end = (middle * 60) / 3
-        output = end - 0.3
-        if round(output) > 100:
-            output = 100
-        await ctx.send(f'**{user.name}** is **{output}%** gay!')
-        
     @commands.command(name='source', aliases=['getcode', 'gcode', 'getc', 'sourcecode', 'scode', 'sourcec'])
     async def _source(self, ctx, *, command: str = None):
         """Displays my full source code or for a specific command."""
@@ -108,7 +96,7 @@ class Main(commands.Cog):
         embed = discord.Embed(title="", colour=0x36393E)
         embed.set_author(name="Bot Information",
                          icon_url="https://cdn.discordapp.com/avatars/692487204441817200/05d82251bc246225507ce639d4e79d1d.png?size=1024")
-        embed.set_footer(text="Made with love by J_J#2112",
+        embed.set_footer(text="Made with love by Jadon#5306",
                          icon_url="https://cdn.discordapp.com/avatars/692487204441817200/05d82251bc246225507ce639d4e79d1d.png?size=1024")
         # embed.set_image(url="https://cdn.discordapp.com/avatars/554852324376313856/d1e157c1f5b8fa94ca18b66a7b8d4b91.png?size=256")
         embed.set_thumbnail(
