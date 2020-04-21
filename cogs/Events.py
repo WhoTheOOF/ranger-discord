@@ -7,19 +7,88 @@ class Events(commands.Cog):
     self.bot = bot
 
 
-  @commands.Cog.listener()
-  async def on_member_ban(self, member):
-    embed = discord.Embed(title="Ranger Logging - User Banned", description="**User: {} (`{}`)\n**Mod:** {} (`{}`)\n**Reason:** {}".format(
-                                   member.mention, str(member), ctx.message.author.mention, str(ctx.author), reason))
-    channel = discord.utils.get(ctx.guild.text_channels, name='mod-logs')
-    await channel.send(embed=embed)
+    def has_permission(self, guild):
+        return guild.me.guild_permissions.view_audit_log
+
+    async def get_audit_logs(self, guild, limit=100, user=None, action=None)->list:
+        try:
+            return await self.bot.get_guild(guild.id).audit_logs(limit=limit, user=user, action=action).flatten()
+        except:
+            return []
+
+    def get_embed(self, color=0xFFFF00):
+        emb = commands.Embed()
+        emb.colour = color
+        emb.timestamp = datetime.datetime.utcnow()
+        return emb
+
+    def get_state(self, guild)->objects.LoggingFlags:
+        if guild.id not in self.states:
+            return None
+
+
+        if self.states[guild.id] is not None and not self.states[guild.id].channel:
+            return None
+
+        return self.states[guild.id]
+
+    async def send_to_channel(self, state, content=None, embed=None):
+        channel = self.bot.get_channel(state.channel)
+        if channel is None:
+            return
+
+        try:
+            await channel.send(content, embed=embed)
+        except commands.HTTPException:
+            pass
 
   @commands.Cog.listener()
-  async def on_member_unban(self, member):
-    embed = discord.Embed(title="Ranger Logging - User Unbanned", description="**User: {} (`{}`)\n**Mod:** {} (`{}`)\n**Reason:** {}".format(
-                                   member.mention, str(member), ctx.message.author.mention, str(ctx.author), reason))
-    channel = discord.utils.get(ctx.guild.text_channels, name='mod-logs')
-    await channel.send(embed=embed)
+  async def on_member_ban(self, guild, user):
+    state = self.get_state(guild)
+    if state is None:
+      return
+
+    if not state.member_ban:
+      return
+
+    embed = self.get_embed(color=commands.Color.red())
+    embed.title = "Ranger Logging - User Banned"
+    embed.description = f"<:bancreate:702244371365363712> {user}\n"
+    embed.set_footer(text=f"User ID: {user.id}")
+
+    if not self.has_permission(guild):
+      embed.description += "(I don't have permission to view audit logs, please give me permission)"
+      await self.send_to_channel(state, embed=embed)
+      return
+
+    log = await self.get_audit_logs(guild, limit=1, action=discord.AuditLogAction.ban)
+    log = log[0]
+    embed.add_field(name="Moderator", value=f"{log.user.mention} - {log.user} (id: {log.user.id})")
+    await self.send_to_channel(state, embed=embed)
+
+  @commands.Cog.listener()
+  async def on_member_unban(self, guild, user):
+    state = self.get_state(guild)
+    if state is None:
+      return
+
+    if not state.member_unban:
+      return
+
+    embed = self.get_embed(color=commands.Color.red())
+    embed.title = "Ranger Logging - User Unbanned"
+    embed.description = f"<:banremove:702244359390625862> {user}\n"
+    embed.set_footer(text=f"User ID: {user.id}")
+
+    if not self.has_permission(guild):
+      embed.description += "(I don't have permission to view audit logs, please give me permission)"
+      await self.send_to_channel(state, embed=embed)
+      return
+
+    log = await self.get_audit_logs(guild, limit=1, action=discord.AuditLogAction.unban)
+    log = log[0]
+    embed.add_field(name="Moderator", value=f"{log.user.mention} - {log.user} (id: {log.user.id})")
+    await self.send_to_channel(state, embed=embed)
   
   @commands.Cog.listener()
   async def on_member_join(self, member):
