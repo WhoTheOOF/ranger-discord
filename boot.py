@@ -17,6 +17,7 @@ bot = commands.AutoShardedBot(command_prefix=commands.when_mentioned_or('r-'), d
 
 
 toload = ["cogs.Main",
+          "cogs.Mod",
           "cogs.Events"]
 bot.cogss = toload
 bot.boot_time = 0
