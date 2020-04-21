@@ -1,5 +1,4 @@
 import discord
-import psutil
 from discord.ext import commands
 import datetime
 import os
@@ -15,7 +14,7 @@ class Main(commands.Cog):
         
     @commands.command()
     async def gay(self, ctx, user: discord.User = None):
-        """tell how gay someone is, k boomer"""
+        """tell how game someone is, k boomer"""
         user = user if user is not None else ctx.author
         input = len(user.name)
         middle = input / 5
