@@ -113,7 +113,7 @@ class Main(commands.Cog):
         
     @commands.command()
     async def invite(self, ctx):
-        embed = discord.Embed(description="[Bot Invite](https://discordapp.com/oauth2/authorize?client_id=692487204441817200&scope=bot)\n\n[Support Server](https://discord.gg/RPD67Db)\n\n[Source Code](https://github.com/WhoTheOOF/ranger-discord)")
+        embed = discord.Embed(description="[Bot Invite](https://discordapp.com/oauth2/authorize?client_id=705030481359536138&scope=bot&permissions=8)\n\n[Support Server](https://discord.gg/RPD67Db)\n\n[Source Code](https://github.com/WhoTheOOF/ranger-discord)")
         await ctx.send(embed=embed)
         
 def setup(bot):
