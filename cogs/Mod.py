@@ -39,27 +39,17 @@ class Mod(commands.Cog):
         await ctx.message.delete()
         m = await self.how_to_purge(ctx, amount, check=check)
         await ctx.send(f"Removed {m} messages.", delete_after=5)
-        ml = discord.Embed(title="Messages purged",
-                           description="**Mod:** {} (`{}`)\n**Amount:** {}".format(ctx.message.author.mention,
-                                                                                   str(ctx.author), m))
+        ml = discord.Embed(title="Messages purged", description="**Mod:** {} (`{}`)\n**Amount:** {}".format(ctx.message.author.mention, str(ctx.author), m))
         channel = discord.utils.get(ctx.message.guild.text_channels, name='mod-logs')
         await channel.send(embed=ml)
-
+        
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     @commands.bot_has_permissions(manage_messages=True)
     async def warn(self, ctx, member: discord.Member, *, reason='No reason'):
         if member.top_role <= ctx.author.top_role:
-            embed = discord.Embed(
-                description="You were warned in **{}** for {}, warned by {} (`{}`)".format(ctx.guild.name, reason,
-                                                                                           ctx.author.mention,
-                                                                                           str(ctx.author),
-                                                                                           color=0x36393E))
-            await member.send(embed=embed)
             await ctx.send("`{}` was warned successfully".format(str(member)))
-            ml = discord.Embed(title="User warned",
-                               description="**User:** {} (`{}`)\n**Mod:** {} (`{}`)\n**Reason:** {}".format(
-                                   member.mention, str(member), ctx.message.author.mention, str(ctx.author), reason))
+            ml = discord.Embed(title="User warned", description="**User:** {} (`{}`)\n**Mod:** {} (`{}`)\n**Reason:** {}".format(member.mention, str(member), ctx.message.author.mention, str(ctx.author), reason))
             channel = discord.utils.get(ctx.message.guild.text_channels, name='mod-logs')
             await channel.send(embed=ml)
 
@@ -68,16 +58,10 @@ class Mod(commands.Cog):
     @commands.bot_has_permissions(ban_members=True)
     async def ban(self, ctx, member: discord.Member, *, reason='No reason'):
         if member.top_role <= ctx.author.top_role:
-            embed = discord.Embed(
-                description="You were banned from **{}** by {} (`{}`) for {}".format(ctx.guild.name, ctx.author.mention,
-                                                                                     str(ctx.author), reason,
-                                                                                     color=0x36393E))
-            await member.send(embed=embed)
             await member.ban(reason=reason)
             await ctx.send("`{}` was banned from the server.".format(str(member)))
             ml = discord.Embed(title="User banned",
-                               description="**User:** {} (`{}`)\n**Mod:** {} (`{}`)\n**Reason:** {}".format(
-                                   member.mention, str(member), ctx.message.author.mention, str(ctx.author), reason))
+                            description="**User:** {} (`{}`)\n**Mod:** {} (`{}`)\n**Reason:** {}".format(member.mention, str(member), ctx.message.author.mention, str(ctx.author), reason))
             channel = discord.utils.get(ctx.message.guild.text_channels, name='mod-logs')
             await channel.send(embed=ml)
 
@@ -88,11 +72,7 @@ class Mod(commands.Cog):
         await ctx.guild.unban(user, reason=reason)
         await ctx.send("{} was successfully unbanned.".format(user.mention))
         ml = discord.Embed(title="User unbanned",
-                           description="**User:** {} (`{}`)\n**Mod:** {} (`{}`)\n**Reason:** {}".format(user.mention,
-                                                                                                        str(user),
-                                                                                                        ctx.message.author.mention,
-                                                                                                        str(ctx.author),
-                                                                                                        reason))
+                           description="**User:** {} (`{}`)\n**Mod:** {} (`{}`)\n**Reason:** {}".format(user.mention, str(user), ctx.message.author.mention, str(ctx.author), reason))
         channel = discord.utils.get(ctx.message.guild.text_channels, name='mod-logs')
         await channel.send(embed=ml)
 
@@ -101,16 +81,10 @@ class Mod(commands.Cog):
     @commands.bot_has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason='No reason'):
         if member.top_role <= ctx.author.top_role:
-            embed = discord.Embed(
-                description="You were kicked from **{}** by {} (`{}`) for {}".format(ctx.guild.name, ctx.author.mention,
-                                                                                     str(ctx.author), reason,
-                                                                                     color=0x36393E))
-            await member.send(embed=embed)
             await member.kick(reason=reason)
             await ctx.send("`{}` was kicked from the server.".format(str(member)))
             ml = discord.Embed(title="User kicked",
-                               description="**User:** {} (`{}`)\n**Mod:** {} (`{}`)\n**Reason:** {}".format(
-                                   member.mention, str(member), ctx.message.author.mention, str(ctx.author), reason))
+                                description="**User:** {} (`{}`)\n**Mod:** {} (`{}`)\n**Reason:** {}".format(member.mention, str(member), ctx.message.author.mention, str(ctx.author), reason))
             channel = discord.utils.get(ctx.message.guild.text_channels, name='mod-logs')
             await channel.send(embed=ml)
 
@@ -119,17 +93,11 @@ class Mod(commands.Cog):
     @commands.has_permissions(manage_guild=True)
     async def mute(self, ctx, member: discord.Member, *, reason='No reason'):
         if member.top_role <= ctx.author.top_role:
-            embed = discord.Embed(
-                description="You were muted in **{}** by {} (`{}`) for {}".format(ctx.guild.name, ctx.author.mention,
-                                                                                  str(ctx.author), reason,
-                                                                                  color=0x36393E))
-            await member.send(embed=embed)
             role = discord.utils.get(ctx.guild.roles, name="Muted")
             await member.add_roles(role)
             await ctx.send("`{}` was muted.".format(str(member)))
             ml = discord.Embed(title="User muted",
-                               description="**User:** {} (`{}`)\n**Mod:** {} (`{}`)\n**Reason:** {}".format(
-                                   member.mention, str(member), ctx.message.author.mention, str(ctx.author), reason))
+                               description="**User:** {} (`{}`)\n**Mod:** {} (`{}`)\n**Reason:** {}".format(member.mention, str(member), ctx.message.author.mention, str(ctx.author), reason))
             channel = discord.utils.get(ctx.message.guild.text_channels, name='mod-logs')
             await channel.send(embed=ml)
 
@@ -138,17 +106,11 @@ class Mod(commands.Cog):
     @commands.has_permissions(manage_guild=True)
     async def unmute(self, ctx, member: discord.Member, *, reason='No reason'):
         if member.top_role <= ctx.author.top_role:
-            embed = discord.Embed(
-                description="You were unmuted in **{}** by {} (`{}`) for {}".format(ctx.guild.name, ctx.author.mention,
-                                                                                    str(ctx.author), reason,
-                                                                                    color=0x36393E))
-            await member.send(embed=embed)
             role = discord.utils.get(ctx.guild.roles, name="Muted")
             await member.remove_roles(role)
             await ctx.send("`{}` was successfully unmuted.".format(str(member)))
             ml = discord.Embed(title="User unmuted",
-                               description="**User:** {} (`{}`)\n**Mod:** {} (`{}`)\n**Reason:** {}".format(
-                                   member.mention, str(member), ctx.message.author.mention, str(ctx.author), reason))
+                               description="**User:** {} (`{}`)\n**Mod:** {} (`{}`)\n**Reason:** {}".format(member.mention, str(member), ctx.message.author.mention, str(ctx.author), reason))
             channel = discord.utils.get(ctx.message.guild.text_channels, name='mod-logs')
             await channel.send(embed=ml)
 
