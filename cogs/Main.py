@@ -5,7 +5,6 @@ import os
 import inspect
 import random
 import asyncio
-from psutil import Process
 from os import getpid
 
 class Main(commands.Cog):
