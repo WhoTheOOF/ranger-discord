@@ -64,7 +64,7 @@ async def on_ready():
 
     
 bot.owner_ids = [
-          699751199850758267
+          711057339360477184
 ]
 
 bot.load_extension('jishaku')
