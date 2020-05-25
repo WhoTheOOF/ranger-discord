@@ -55,7 +55,7 @@ class Main(commands.Cog):
     @commands.command(aliases=['mem', 'm'], hidden=True)
     @commands.is_owner()
     async def memory(self, ctx):
-        await ctx.send(f'Ranger is currently using **{round(Process(getpid()).memory_info().rss/1024/1024, 2)} MB** of memory.')
+        embed = discord.Embed(description=f'Ranger is currently using **{round(Process(getpid()).memory_info().rss/1024/1024, 2)} MB** of memory.')
 
     @commands.command()
     async def avatar(self, ctx, *, user: discord.User):
@@ -95,13 +95,13 @@ class Main(commands.Cog):
         embed = discord.Embed(title="", colour=0x36393E)
         embed.set_author(name="Bot Information",
                          icon_url="https://cdn.discordapp.com/avatars/692487204441817200/05d82251bc246225507ce639d4e79d1d.png?size=1024")
-        embed.set_footer(text="Made with love by Jadon#5306",
+        embed.set_footer(text="Made with love by Jadon#2494",
                          icon_url="https://cdn.discordapp.com/avatars/692487204441817200/05d82251bc246225507ce639d4e79d1d.png?size=1024")
         # embed.set_image(url="https://cdn.discordapp.com/avatars/554852324376313856/d1e157c1f5b8fa94ca18b66a7b8d4b91.png?size=256")
         embed.set_thumbnail(
             url="https://cdn.discordapp.com/avatars/692487204441817200/05d82251bc246225507ce639d4e79d1d.png?size=1024")
 
-        embed.add_field(name="**Owner**", value="<@699751199850758267>", inline=True)
+        embed.add_field(name="**Owner**", value="<@711057339360477184>", inline=True)
         embed.add_field(name="**Library**", value="discord.py", inline=True)
         embed.add_field(name="**Server Count**", value=len(self.bot.guilds), inline=True)
         embed.add_field(name="**Bot Users**", value=len(self.bot.users), inline=True)
@@ -110,7 +110,7 @@ class Main(commands.Cog):
         
         await ctx.send(embed=embed)
         
-    @commands.command()
+    @commands.command(aliases=['support'])
     async def invite(self, ctx):
         embed = discord.Embed(description="[Bot Invite](https://discordapp.com/oauth2/authorize?client_id=705030481359536138&scope=bot&permissions=8)\n\n[Support Server](https://discord.gg/RPD67Db)\n\n[Source Code](https://github.com/WhoTheOOF/ranger-discord)")
         await ctx.send(embed=embed)
