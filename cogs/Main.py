@@ -55,7 +55,7 @@ class Main(commands.Cog):
     @commands.command(aliases=['mem', 'm'], hidden=True)
     @commands.is_owner()
     async def memory(self, ctx):
-        embed = discord.Embed(description=f'Ranger is currently using **{round(Process(getpid()).memory_info().rss/1024/1024, 2)} MB** of memory.')
+        await ctx.send(f'Ranger is currently using **{round(Process(getpid()).memory_info().rss/1024/1024, 2)} MB** of memory.')
 
     @commands.command()
     async def avatar(self, ctx, *, user: discord.User):
