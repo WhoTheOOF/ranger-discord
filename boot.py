@@ -1,18 +1,16 @@
-import discord
-from discord.ext import commands
-import time
-import aiohttp
-import io
-import json
-import textwrap
 import ast
-import datetime
-import os
-import traceback
-import typing
-import random
 import inspect
-import asyncio
+import json
+import io
+import textwrap
+import traceback
+import aiohttp
+import random
+from contextlib import redirect_stdout
+from discord.ext import commands
+from discord.voice_client import VoiceClient
+import discord, time, datetime, os, traceback
+from random import randint
 from jishaku import help_command
 t =  datetime.datetime.today()
 dt = t.strftime('%a, %d, %B, %Y, %I:%M %p')
