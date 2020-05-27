@@ -6,6 +6,7 @@ import datetime
 import traceback
 import typing
 import random
+import inspect
 import asyncio
 from jishaku import help_command
 t =  datetime.datetime.today()
